@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Class Scheduling Interface</title>
+</head>
+<body>
+
+<h2>Class Scheduling</h2>
+
+<form id="scheduleForm" enctype="multipart/form-data">
+  <div class="container">
+    <label for="scheduleFile"><b>Select Schedule File:</b></label>
+    <input type="file" id="scheduleFile" name="scheduleFile" accept=".pdf, .doc, .docx, .xls, .xlsx, .csv" required>
+
+    <label for="preferredSlots"><b>Select Preferred Time Slots:</b></label>
+    <select id="preferredSlots" name="preferredSlots" multiple required>
+      <option value="morning">Morning</option>
+      <option value="afternoon">Afternoon</option>
+      <option value="evening">Evening</option>
+    </select>
+
+    <button type="submit">
+   <a href="1 trail.html">Next</button></a>
+</form>
+
+<script>
+  document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var fileInput = document.getElementById('scheduleFile');
+    var preferredSlots = document.getElementById('preferredSlots');
+    
+    if (!fileInput.files.length) {
+      alert('Please upload a schedule file.');
+      return;
+    }
+
+    if (!preferredSlots.value.length) {
+      alert('Please select preferred time slots.');
+      return;
+       
+    }
+
+    var formData = new FormData(this);
+
+    fetch('/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '1 trail.html'; 
+      } else {
+        throw new Error('Network response was not ok.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+
+    });
+  });
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot with Multiple Answers</title>
+  <style>
+    /* Your CSS styles for the chatbot interface */
+    /* CSS styles remain the same as in the previous example */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    #chat-container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* Other styles remain the same */
+  </style>
+</head>
+<body>
+
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <div>
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const userInput = document.getElementById('user-input').value.trim();
+      if (userInput === '') return;
+
+      const chatBox = document.getElementById('chat-box');
+
+      // Display user message in the chat box
+      const userMessage = `<div><strong>You:</strong> ${userInput}</div>`;
+      chatBox.innerHTML += userMessage;
+
+      // Respond with predefined answers based on user input
+      let botMessage;
+      switch (userInput.toLowerCase()) {
+        case 'hi':
+        case 'hello':
+          botMessage = `<div><strong>Chatbot:</strong> Hi there!</div>`;
+          break;
+        case 'how are you?':
+          botMessage = `<div><strong>Chatbot:</strong> I'm fine, thank you!</div>`;
+          break;
+        case 'bye':
+          botMessage = `<div><strong>Chatbot:</strong> Goodbye!</div>`;
+          break;
+        default:
+          botMessage = `<div><strong>Chatbot:</strong> <a href="https://chat.openai.com/">open ai</a></div>`;
+          break;
+      }
+
+      // Display chatbot's response in the chat box
+      chatBox.innerHTML += botMessage;
+
+      // Clear the input field after sending message
+      document.getElementById('user-input').value = '';
+
+      // Scroll to the bottom of the chat box
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>

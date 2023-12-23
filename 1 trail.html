@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendance Recording</title>
+</head>
+<body>
+
+<h2>Record Attendance</h2>
+
+<form id="attendanceForm">
+  <div class="container">
+    <label for="classroomId"><b>Classroom ID:</b></label>
+    <input type="text" id="classroomId" name="classroomId" required>
+
+    <label for="studentId"><b>Student ID:</b></label>
+    <input type="text" id="studentId" name="studentId" required>
+
+    <label for="attended"><b>Attended:</b></label>
+    <input type="checkbox" id="attended" name="attended" value="attended">
+
+    <button type="bs3 trail.html">
+      <a href="bs3 trail.html">Submit Attendance</button></a>
+    
+  </div>
+</form>
+
+<script>
+  document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var classId = document.getElementById('classId').value;
+    var studentId = document.getElementById('studentId').value;
+    var attended = document.getElementById('attended').checked;
+
+    // Simulate client-side validation
+    if (classId == '204A') {
+      alert('correct Classroom ID');
+      return;
+    }
+
+    if (studentId == '4YG22CS050') {
+      alert('correct Student ID');
+      return;
+    }
+
+    // Send the attendance data to the server for processing (this part requires server-side scripting)
+    // You would typically use AJAX or fetch to send this data to a server-side script
+
+    // Example: Sending the data to a server-side script using fetch (replace URL with your server-side endpoint)
+    fetch('/process-attendance', {
+      method: 'POST',
+      body: JSON.stringify({ classId, studentId, attended }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      // Handle the response from the server
+      if (response.ok) {
+        alert('Attendance recorded successfully');
+        
+        document.getElementById('attendanceForm').reset();
+      } else {
+        alert('Failed to record attendance');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while recording attendance');
+    });
+  });
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot with Multiple Answers</title>
+  <style>
+    /* Your CSS styles for the chatbot interface */
+    /* CSS styles remain the same as in the previous example */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    #chat-container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* Other styles remain the same */
+  </style>
+</head>
+<body>
+
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <div>
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const userInput = document.getElementById('user-input').value.trim();
+      if (userInput === '') return;
+
+      const chatBox = document.getElementById('chat-box');
+
+      // Display user message in the chat box
+      const userMessage = `<div><strong>You:</strong> ${userInput}</div>`;
+      chatBox.innerHTML += userMessage;
+
+      // Respond with predefined answers based on user input
+      let botMessage;
+      switch (userInput.toLowerCase()) {
+        case 'hi':
+        case 'hello':
+          botMessage = `<div><strong>Chatbot:</strong> Hi there!</div>`;
+          break;
+        case 'how are you?':
+          botMessage = `<div><strong>Chatbot:</strong> I'm fine, thank you!</div>`;
+          break;
+        case 'bye':
+          botMessage = `<div><strong>Chatbot:</strong> Goodbye!</div>`;
+          break;
+        default:
+          botMessage = `<div><strong>Chatbot:</strong> <a href="https://chat.openai.com/">open ai</a></div>`;
+          break;
+      }
+
+      // Display chatbot's response in the chat box
+      chatBox.innerHTML += botMessage;
+
+      // Clear the input field after sending message
+      document.getElementById('user-input').value = '';
+
+      // Scroll to the bottom of the chat box
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>

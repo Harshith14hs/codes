@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <script>
+    function validateLogin() {
+      var enteredUsername = document.getElementById("username").value;
+      var enteredPassword = document.getElementById("password").value;
+
+      if (enteredUsername == "hhs" && enteredPassword == "htk") {
+        alert("Login Successful!"); 
+      } else {
+        alert("Incorrect username or password. Please try again."); 
+      }
+    }
+  </script>
+</head>
+<body>
+
+<h2>Login</h2>
+
+<form onsubmit="event.preventDefault(); validateLogin();">
+  <div class="container">
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" id="username" required>
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" required>
+    <button type="submit">
+    <a href="bs2 trail.html">Login<button></a>
+
+  </div>
+</form>
+
+</body>
+</html>

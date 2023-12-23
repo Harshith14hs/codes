@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Request Progress Report</title>
+</head>
+<body>
+
+<h2>Request Progress Report</h2>
+
+<form id="progressReportForm" onsubmit="requestProgressReport(event)">
+  <div class="container">
+    <label for="studentId"><b>Student ID:</b></label>
+    <input type="text" id="studentId" name="studentId" required>
+
+    <button type="submit">
+    <a href="cb trail.html">submit report</button></a>
+  </div>
+</form>
+
+<script>
+  function requestProgressReport(event) {
+    event.preventDefault();
+    
+    var studentId = document.getElementById('4YG22CS050').value;
+
+    // Simulate sending a request for a progress report (replace with backend functionality)
+    fetch('/4YG22CS050', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ studentId: studentId })
+    })
+    .then(response => response.text())
+    .then(data => {
+      alert('Progress report requested. Check your email for details.'); // Simulated response
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while requesting the report');
+    });
+  }
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot with Multiple Answers</title>
+  <style>
+    /* Your CSS styles for the chatbot interface */
+    /* CSS styles remain the same as in the previous example */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+    #chat-container {
+      border: 1px solid #ccc;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    /* Other styles remain the same */
+  </style>
+</head>
+<body>
+
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <div>
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const userInput = document.getElementById('user-input').value.trim();
+      if (userInput === '') return;
+
+      const chatBox = document.getElementById('chat-box');
+
+      // Display user message in the chat box
+      const userMessage = `<div><strong>You:</strong> ${userInput}</div>`;
+      chatBox.innerHTML += userMessage;
+
+      // Respond with predefined answers based on user input
+      let botMessage;
+      switch (userInput.toLowerCase()) {
+        case 'hi':
+        case 'hello':
+          botMessage = `<div><strong>Chatbot:</strong> Hi there!</div>`;
+          break;
+        case 'how are you?':
+          botMessage = `<div><strong>Chatbot:</strong> I'm fine, thank you!</div>`;
+          break;
+        case 'bye':
+          botMessage = `<div><strong>Chatbot:</strong> Goodbye!</div>`;
+          break;
+        default:
+          botMessage = `<div><strong>Chatbot:</strong> <a href="https://chat.openai.com/">open ai</a></div>`;
+          break;
+      }
+
+      // Display chatbot's response in the chat box
+      chatBox.innerHTML += botMessage;
+
+      // Clear the input field after sending message
+      document.getElementById('user-input').value = '';
+
+      // Scroll to the bottom of the chat box
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
